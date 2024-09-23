@@ -1,0 +1,16 @@
+.env
+.terraform
+terraform.tfvars
+terraforma-aws.pem
+tfplan
+terraform.tfstate
+terraform.tfstate.backup
+terraforma-aws.pem:Zone.Identifier
+.terraform.lock.hcl
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate
+.terraform.tfstate
+var.tf
+.terraform/
+sh -i terraforma-aws.pem ubuntu@ec2-54-92-153-241.compute-1.amazonaws.com
