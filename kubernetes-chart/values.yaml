@@ -1,0 +1,38 @@
+replicaCount: 1
+
+image:
+  repository: lanchonetews
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 3000
+
+postgresql:
+  image: postgres:latest
+  port: 5432
+  secret:
+    name: postgresql-secret
+  pvc:
+    storage: 1Gi
+
+adminer:
+  image: adminer
+  service:
+    port: 8080
+
+sqlRunner:
+  image: postgres:latest
+
+lanchonetews:
+  service:
+    port: 3000
+  env:
+    dbHost: postgresql 
+    dbPort: 5432
+    dbUser: admin
+    dbPassword: admin@123
+    dbName: lanchonete_ws
+
+resources: {}

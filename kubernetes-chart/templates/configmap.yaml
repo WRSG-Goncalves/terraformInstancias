@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lanchonetews-config
+data:
+  DB_HOST: postgresql
+  DB_USER: admin
+  DB_PASSWORD: admin@123
+  DB_DATABASE: lanchonete_ws
+  DB_PORT: "5432"
+  PORT: "3001"
+  HOST: "http://lanchonetews:3000/api/payment-status"
