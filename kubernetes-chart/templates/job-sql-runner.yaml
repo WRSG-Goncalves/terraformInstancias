@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sql-runner-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: sql-runner
+          image: {{ .Values.sqlRunner.image }}
+          command: ["bash", "-c"]
+          args:
+            - |
+              sleep 10 &&
+              PGPASSWORD={{ .Values.lanchonetews.env.dbPassword }} psql \
+              -h {{ .Values.lanchonetews.env.dbHost }} \
+              -U {{ .Values.lanchonetews.env.dbUser }} \
+              -d {{ .Values.lanchonetews.env.dbName }} \
+              -a -f /docker-entrypoint-initdb.d/create_table.sql
+          volumeMounts:
+            - name: sql-files
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: sql-files
+          configMap:
+            name: sql-scripts
+      restartPolicy: OnFailure

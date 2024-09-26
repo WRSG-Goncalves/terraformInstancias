@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lanchonetwsapp
+  template:
+    metadata:
+      labels:
+        app: lanchonetwsapp
+    spec:
+      containers:
+      - name: techchallenge-webhook
+        image: wstecnologia/tech-webhook:latest
+        ports:
+        - containerPort: 3001
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: lanchonetews-config
+                key: PORT
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                name: lanchonetews-config
+                key: HOST
